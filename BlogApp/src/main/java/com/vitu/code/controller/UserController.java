@@ -26,6 +26,8 @@ public class UserController {
 	@Autowired
 	private UserServiceImpl userimpl;
 
+	// create user
+
 	@PostMapping
 	public ResponseEntity<UserDto> createUsers(@Valid @RequestBody UserDto userDto) {
 
@@ -34,12 +36,15 @@ public class UserController {
 		return new ResponseEntity<UserDto>(createUser, HttpStatus.CREATED);
 	}
 
+//get all users
 	@GetMapping
 	public ResponseEntity<List<UserDto>> getAllUsers() {
 
 		List<UserDto> allUsers = userimpl.getAllUsers();
 		return new ResponseEntity<List<UserDto>>(allUsers, HttpStatus.OK);
 	}
+
+	// get single user
 
 	@GetMapping("/{userId}")
 	public ResponseEntity<UserDto> getUserById(@PathVariable int userId) {
@@ -48,19 +53,21 @@ public class UserController {
 		return new ResponseEntity<UserDto>(userById, HttpStatus.OK);
 
 	}
+//delete user by using userId
 
 	@DeleteMapping("/{userId}")
 	public ResponseEntity<String> deleteUserById(@PathVariable int userId) {
 
-	 String deleteUserById = userimpl.deleteUserById(userId);
+		String deleteUserById = userimpl.deleteUserById(userId);
 		return new ResponseEntity<String>(deleteUserById, HttpStatus.OK);
 
 	}
-	
+	// update users by using userId
+
 	@PutMapping("/{userId}")
-	public ResponseEntity<UserDto> updateUsers(@Valid @RequestBody UserDto userDto,@PathVariable int userId){
-		
+	public ResponseEntity<UserDto> updateUsers(@Valid @RequestBody UserDto userDto, @PathVariable int userId) {
+
 		UserDto updateUserById = userimpl.updateUserById(userDto, userId);
-		return new  ResponseEntity<UserDto>(updateUserById,HttpStatus.OK);
+		return new ResponseEntity<UserDto>(updateUserById, HttpStatus.OK);
 	}
 }

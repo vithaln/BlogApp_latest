@@ -25,42 +25,54 @@ public class CategoryController {
 
 	@Autowired
 	private CategoryImpl categoryImpl;
-	
+
+	// create category
+
 	@PostMapping
-	public ResponseEntity<CategoryDto> createCategories(@Valid @RequestBody CategoryDto categoryDto){
-		
+	public ResponseEntity<CategoryDto> createCategories(@Valid @RequestBody CategoryDto categoryDto) {
+
 		CategoryDto createCategories = categoryImpl.createCategories(categoryDto);
-		
-		return new ResponseEntity<CategoryDto>(createCategories,HttpStatus.CREATED);
+
+		return new ResponseEntity<CategoryDto>(createCategories, HttpStatus.CREATED);
 	}
-	
+
+	// get All categories
+
 	@GetMapping
-	public ResponseEntity<List<CategoryDto>> getAllCategories(){
-		
+	public ResponseEntity<List<CategoryDto>> getAllCategories() {
+
 		List<CategoryDto> allCategories = categoryImpl.getAllCategories();
-		
-		return new ResponseEntity<List<CategoryDto>>(allCategories,HttpStatus.OK);
+
+		return new ResponseEntity<List<CategoryDto>>(allCategories, HttpStatus.OK);
 	}
-	
+	// get category by using categoryID
+
 	@GetMapping("/{categoryId}")
-	public ResponseEntity<CategoryDto> getCategoryById(@PathVariable int categoryId){
-		
+	public ResponseEntity<CategoryDto> getCategoryById(@PathVariable int categoryId) {
+
 		CategoryDto categoryById = categoryImpl.getCategoryById(categoryId);
-		
-		return new ResponseEntity<CategoryDto>(categoryById,HttpStatus.OK);
+
+		return new ResponseEntity<CategoryDto>(categoryById, HttpStatus.OK);
 	}
+
+	// update category by using categoryID
+
 	@PutMapping("/{categoryId}")
-	public ResponseEntity<CategoryDto> updateCategoryById(@Valid @RequestBody CategoryDto categoryDto, @PathVariable int categoryId){
-		
+	public ResponseEntity<CategoryDto> updateCategoryById(@Valid @RequestBody CategoryDto categoryDto,
+			@PathVariable int categoryId) {
+
 		CategoryDto categoryById = categoryImpl.upadteCategories(categoryDto, categoryId);
-		
-		return new ResponseEntity<CategoryDto>(categoryById,HttpStatus.OK);
+
+		return new ResponseEntity<CategoryDto>(categoryById, HttpStatus.OK);
 	}
+
+	// delete categoryByID
+
 	@DeleteMapping("/{categoryId}")
-	public ResponseEntity<String> deleteCategoryById(@PathVariable int categoryId){
-		
-		 categoryImpl.deleteCategoryById(categoryId);
-		
-		return new ResponseEntity<String>("Category has been delted successfully...",HttpStatus.OK);
+	public ResponseEntity<String> deleteCategoryById(@PathVariable int categoryId) {
+
+		categoryImpl.deleteCategoryById(categoryId);
+
+		return new ResponseEntity<String>("Category has been delted successfully...", HttpStatus.OK);
 	}
 }

@@ -19,23 +19,25 @@ public class CommentController {
 
 	@Autowired
 	private CommentServiceImpl commentServiceImpl;
-	
+
+	// create comments
+
 	@PostMapping("/{postId}")
-	public ResponseEntity<CommentDto> createComment(@RequestBody CommentDto commentDto,@PathVariable int postId)
-	{
+	public ResponseEntity<CommentDto> createComment(@RequestBody CommentDto commentDto, @PathVariable int postId) {
 		CommentDto createComments = commentServiceImpl.createComments(commentDto, postId);
-	
-		return new ResponseEntity<CommentDto>(createComments,HttpStatus.CREATED);
-	
-	}
-	@DeleteMapping("/{commentId}")
-	public ResponseEntity<String> deleteComment(@PathVariable Integer commentId)
-	{
-commentServiceImpl.deleteComments(commentId);
-	
-		return new ResponseEntity<String>("COMMENET HAS BEEN DELETED SUCCESSFULLY!!..",HttpStatus.OK);
-	
+
+		return new ResponseEntity<CommentDto>(createComments, HttpStatus.CREATED);
 
 	}
-	
+
+	// delete comments
+
+	@DeleteMapping("/{commentId}")
+	public ResponseEntity<String> deleteComment(@PathVariable Integer commentId) {
+		commentServiceImpl.deleteComments(commentId);
+
+		return new ResponseEntity<String>("COMMENET HAS BEEN DELETED SUCCESSFULLY!!..", HttpStatus.OK);
+
+	}
+
 }
